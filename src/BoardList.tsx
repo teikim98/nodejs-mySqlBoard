@@ -44,14 +44,14 @@ function BoardList() {
                 </thead>
                 <tbody>
                     {
-                        boardList.map((v: any) => {
+                        boardList.map((v: any, index) => {
                             return (
                                 <Board
                                     id={v.BOARD_ID}
                                     title={v.BOARD_TITLE}
                                     registerId={v.REGISTER_ID}
                                     registerDate={v.REGISTER_DATE}
-                                    key={v.REGISTER_ID}
+                                    key={index}
                                 />
                             );
                         })}
