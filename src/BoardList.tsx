@@ -44,7 +44,6 @@ function BoardList() {
                 </thead>
                 <tbody>
                     {
-                        // eslint-disable-next-line
                         boardList.map((v: any) => {
                             return (
                                 <Board
@@ -52,6 +51,7 @@ function BoardList() {
                                     title={v.BOARD_TITLE}
                                     registerId={v.REGISTER_ID}
                                     registerDate={v.REGISTER_DATE}
+                                    key={v.REGISTER_ID}
                                 />
                             );
                         })}
