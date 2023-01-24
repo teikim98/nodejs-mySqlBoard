@@ -31,7 +31,7 @@ function BoardList() {
     if (error) return <div>에러</div>;
 
     return (
-        <div>
+        <div className="mb-5">
             <Table striped bordered hover>
                 <thead>
                     <tr>
