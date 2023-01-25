@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom'
-import { off } from "process";
 
 interface BoardType {
     id: number;
@@ -37,24 +36,7 @@ function BoardList(props: any) {
     if (error) return <div>에러</div>;
 
 
-    const onCheckChange = () => {
-        setModify(prev => !prev);
-        console.log(modify);
-    }
 
-    const Board = ({ id, title, registerId, registerDate }: BoardType) => {
-        return (
-            <tr>
-                <td>
-                    <input type="radio" onChange={onCheckChange} ></input>
-                </td>
-                <td>{id}</td>
-                <td>{title}</td>
-                <td>{registerId}</td>
-                <td>{registerDate}</td>
-            </tr>
-        );
-    };
 
     return (
         <div className="mb-5">
@@ -88,7 +70,22 @@ function BoardList(props: any) {
             <Button variant="danger">삭제하기</Button>
         </div>
     );
+
+
 }
+const Board = ({ id, title, registerId, registerDate }: BoardType) => {
+    return (
+        <tr>
+            <td>
+                <input type="checkbox"></input>
+            </td>
+            <td>{id}</td>
+            <td>{title}</td>
+            <td>{registerId}</td>
+            <td>{registerDate}</td>
+        </tr>
+    );
+};
 
 
 
