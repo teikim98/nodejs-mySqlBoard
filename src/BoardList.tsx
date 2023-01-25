@@ -2,6 +2,8 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
+import { off } from "process";
 
 interface BoardType {
     id: number;
@@ -10,9 +12,12 @@ interface BoardType {
     registerDate: string;
 }
 
-function BoardList() {
+function BoardList(props: any) {
     const [error, setError] = useState<any>();
     const [boardList, setBoardList] = useState<any[]>([]);
+    const [checkList, setCheckList] = useState<any>();
+    const [modify, setModify] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,6 +27,7 @@ function BoardList() {
                 console.log(boardList);
             } catch (e) {
                 setError(e);
+                console.log(error);
             }
         };
         fetchData();
@@ -29,6 +35,26 @@ function BoardList() {
     }, []);
 
     if (error) return <div>에러</div>;
+
+
+    const onCheckChange = () => {
+        setModify(prev => !prev);
+        console.log(modify);
+    }
+
+    const Board = ({ id, title, registerId, registerDate }: BoardType) => {
+        return (
+            <tr>
+                <td>
+                    <input type="radio" onChange={onCheckChange} ></input>
+                </td>
+                <td>{id}</td>
+                <td>{title}</td>
+                <td>{registerId}</td>
+                <td>{registerDate}</td>
+            </tr>
+        );
+    };
 
     return (
         <div className="mb-5">
@@ -57,25 +83,13 @@ function BoardList() {
                         })}
                 </tbody>
             </Table>
-            <Button variant="info">글쓰기</Button>
-            <Button variant="secondary">수정하기</Button>
+            <Button variant="info"><Link to='/write'>글쓰기</Link></Button>
+            <Button variant="secondary" onClick={() => { }}><Link to='/write'>수정하기</Link></Button>
             <Button variant="danger">삭제하기</Button>
         </div>
     );
 }
 
-const Board = ({ id, title, registerId, registerDate }: BoardType) => {
-    return (
-        <tr>
-            <td>
-                <input type="checkbox"></input>
-            </td>
-            <td>{id}</td>
-            <td>{title}</td>
-            <td>{registerId}</td>
-            <td>{registerDate}</td>
-        </tr>
-    );
-};
+
 
 export default BoardList;
