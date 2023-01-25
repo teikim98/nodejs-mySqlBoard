@@ -18,6 +18,7 @@ function Write() {
                 content: content,
             })
             .then((res) => {
+                alert('글등록 완료!');
                 console.log(res);
             })
             .catch((e) => {
@@ -55,11 +56,11 @@ function Write() {
         <>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>제목</Form.Label>
-                <Form.Control type="text" onChange={handleChangeTitle} placeholder="제목을 입력하세요" value='' />
+                <Form.Control type="text" onChange={handleChangeTitle} placeholder="제목을 입력하세요" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>내용</Form.Label>
-                <Form.Control as="textarea" onChange={handleChangeContent} placeholder="내용을 입력하세요" value='' />
+                <Form.Control as="textarea" onChange={handleChangeContent} placeholder="내용을 입력하세요" />
             </Form.Group>
             <Button variant="info" onClick={isModify ? write : update}>
                 작성완료
