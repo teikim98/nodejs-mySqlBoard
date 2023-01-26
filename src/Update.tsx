@@ -18,24 +18,43 @@ interface BoardType {
 function Update() {
 
     const [board, setBoard] = useState<BoardType[]>([]);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState("");
+    const [title, setTitle] = useState<string>('');
+    const [content, setContent] = useState<string>("");
     const navigate = useNavigate();
 
     const { id } = useParams();
     const numberId = Number(id);
+
+    const DetailId = (did: BoardType) => {
+        return (did.BOARD_ID === numberId);
+    }
+    const detailInside = board.find(DetailId);
+
+
+
+    const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+    }
+    const handleChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setContent(e.target.value);
+    }
+
+
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:8000/detail");
                 setBoard(response.data);
+                setTitle(detailInside.BOARD_TITLE);
+                setContent(detailInside.BOARD_CONTENT);
             } catch (e) {
             }
         };
         fetchData();
-        console.log("loading over!");
-    }, []);
+    }, [id]);
+
 
 
     const update = () => {
@@ -53,24 +72,13 @@ function Update() {
             });
     };
 
-    const DetailId = (did: BoardType) => {
-        return (did.BOARD_ID === numberId);
-    }
-    const detailInside = board.find(DetailId);
-
-
-    const handleChangeTitle = (e: any) => {
-        setTitle(e.target.value);
-    }
-    const handleChangeContent = (e: any) => {
-        setContent(e.target.value);
-    }
-
 
 
 
 
     return (
+
+
         <>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>제목</Form.Label>
