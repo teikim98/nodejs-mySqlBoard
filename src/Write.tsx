@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Axios from "axios";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,6 +11,7 @@ function Write() {
     const [isModify, setisModify] = useState(true);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const navigate = useNavigate();
 
     const write = () => {
         Axios.post("http://localhost:8000/insert",
@@ -19,6 +21,7 @@ function Write() {
             })
             .then((res) => {
                 alert('글등록 완료!');
+                navigate('/');
                 console.log(res);
             })
             .catch((e) => {
@@ -32,6 +35,8 @@ function Write() {
             content: content,
         })
             .then((res) => {
+                alert('글수정 완료!');
+                navigate('/');
                 console.log(res);
             })
             .catch((e) => {
