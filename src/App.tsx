@@ -3,6 +3,7 @@ import BoardList from "./BoardList";
 import Write from "./Write";
 import { Route, Routes } from "react-router-dom";
 import BoardDetail from "./BoardDetail";
+import Update from "./Update";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BoardList />}></Route>
         <Route path="/write" element={<Write />}></Route>
-        <Route path="/detail" element={<BoardDetail />}></Route>
+        <Route path="/update/:id" element={<Update />}></Route>
         <Route path="/detail/:id" element={<BoardDetail />}></Route>
       </Routes>
     </>

@@ -13,9 +13,7 @@ interface BoardType {
 
 function BoardList(props: any) {
     const [error, setError] = useState<any>();
-    const [boardList, setBoardList] = useState<any[]>([]);
-    const [checkList, setCheckList] = useState<any>();
-    const [modify, setModify] = useState(false);
+    const [boardList, setBoardList] = useState<BoardType[]>([])
 
 
     useEffect(() => {
@@ -33,7 +31,10 @@ function BoardList(props: any) {
         console.log("loading over!");
     }, []);
 
+
     if (error) return <div>에러</div>;
+
+
 
 
 
@@ -43,7 +44,6 @@ function BoardList(props: any) {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>선택</th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
@@ -73,12 +73,10 @@ function BoardList(props: any) {
 
 
 }
+
 const Board = ({ id, title, registerId, registerDate }: BoardType) => {
     return (
         <tr>
-            <td>
-                <input type="checkbox"></input>
-            </td>
             <td>{id}</td>
             <td><Link to={`/detail/${id}`}>{title}</Link></td>
             <td>{registerId}</td>

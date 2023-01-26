@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Write() {
 
-    const [isModify, setisModify] = useState(true);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const navigate = useNavigate();
@@ -29,20 +28,6 @@ function Write() {
             });
     };
 
-    const update = () => {
-        Axios.post("http://localhost:8000/update", {
-            title: title,
-            content: content,
-        })
-            .then((res) => {
-                alert('글수정 완료!');
-                navigate('/');
-                console.log(res);
-            })
-            .catch((e) => {
-                console.error(e);
-            });
-    };
 
     const handleChangeTitle = (e: any) => {
         console.log(e.target.value);
@@ -67,7 +52,7 @@ function Write() {
                 <Form.Label>내용</Form.Label>
                 <Form.Control as="textarea" onChange={handleChangeContent} placeholder="내용을 입력하세요" />
             </Form.Group>
-            <Button variant="info" onClick={isModify ? write : update}>
+            <Button variant="info" onClick={write}>
                 작성완료
             </Button>
         </>

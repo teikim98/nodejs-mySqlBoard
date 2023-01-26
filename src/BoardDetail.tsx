@@ -1,7 +1,8 @@
-
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 
 interface BoardType {
     BOARD_ID: number,
@@ -16,9 +17,7 @@ interface BoardType {
 function BoardDetail() {
 
     const [board, setBoard] = useState<BoardType[]>([]);
-
     const { id } = useParams();
-
     const numberId = Number(id);
 
     useEffect(() => {
@@ -34,21 +33,21 @@ function BoardDetail() {
         console.log("loading over!");
     }, []);
 
-
-
     const DetailId = (did: BoardType) => {
         return (did.BOARD_ID === numberId);
     }
 
     const detailInside = board.find(DetailId);
-
     console.log(detailInside);
 
     return (
         <div>
-            detail
+            <h2>{detailInside?.BOARD_TITLE}</h2>
+            <div>
+                {detailInside?.BOARD_CONTENT}
+            </div>
+            <Button variant="secondary"><Link to='/update/1'>수정하기</Link></Button>
         </div>
     );
 }
-
 export default BoardDetail;
