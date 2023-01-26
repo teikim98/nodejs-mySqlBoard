@@ -80,7 +80,7 @@ const Board = ({ id, title, registerId, registerDate }: BoardType) => {
                 <input type="checkbox"></input>
             </td>
             <td>{id}</td>
-            <td>{title}</td>
+            <td><Link to={`/detail/${id}`}>{title}</Link></td>
             <td>{registerId}</td>
             <td>{registerDate}</td>
         </tr>
