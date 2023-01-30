@@ -17,26 +17,27 @@ interface BoardType {
 function BoardDetail() {
 
     const [board, setBoard] = useState<BoardType[]>([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/detail");
+            setBoard(response.data);
+        } catch (e) {
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const { id } = useParams();
     const numberId = Number(id);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("http://localhost:8000/detail");
-                setBoard(response.data);
-                console.log(board);
-            } catch (e) {
-            }
-        };
-        fetchData();
-        console.log("loading over!");
-    }, []);
+    console.log(board);
 
     const DetailId = (did: BoardType) => {
         return (did.BOARD_ID === numberId);
     }
-
     const detailInside = board.find(DetailId);
     console.log(detailInside);
 

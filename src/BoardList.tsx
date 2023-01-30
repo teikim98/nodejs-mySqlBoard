@@ -21,7 +21,7 @@ function BoardList(props: any) {
             try {
                 const response = await axios.get("http://localhost:8000/list");
                 setBoardList(response.data);
-                console.log(boardList);
+
             } catch (e) {
                 setError(e);
                 console.log(error);
@@ -30,7 +30,7 @@ function BoardList(props: any) {
         fetchData();
         console.log("loading over!");
     }, []);
-
+    console.log(boardList);
 
     if (error) return <div>에러</div>;
 
