@@ -17,7 +17,22 @@ interface BoardType {
 
 function Update() {
 
-    const [board, setBoard] = useState<BoardType[]>([]);
+    const [board, setBoard] = useState<BoardType[]>([])
+    const { id } = useParams();
+    const numberId = Number(id);
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState("");
+    const navigate = useNavigate();
+
+
+
+    const DetailId = (did: BoardType) => {
+        return (did.BOARD_ID === numberId);
+    }
+    const detailInside = board.find(DetailId);
+
+
 
     const fetchData = async () => {
         try {
@@ -28,25 +43,23 @@ function Update() {
         }
     };
 
+    const updateSet = () => {
+        if (detailInside?.BOARD_CONTENT !== undefined) {
+            setContent(detailInside.BOARD_CONTENT);
+        }
+        if (detailInside?.BOARD_TITLE !== undefined) {
+            setContent(detailInside.BOARD_TITLE);
+        }
+    }
+
     useEffect(() => {
         fetchData();
     }, []);
 
 
-    console.log(board);
-
-    const { id } = useParams();
-    const numberId = Number(id);
-
-    const [title, setTitle] = useState<string>('');
-    const [content, setContent] = useState<string>("");
-    const navigate = useNavigate();
 
 
-    const DetailId = (did: BoardType) => {
-        return (did.BOARD_ID === numberId);
-    }
-    const detailInside = board.find(DetailId);
+
 
     const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
@@ -70,6 +83,7 @@ function Update() {
                 console.error(e);
             });
     };
+
 
     return (
 
