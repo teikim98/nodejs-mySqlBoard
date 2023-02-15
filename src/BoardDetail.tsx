@@ -47,7 +47,7 @@ function BoardDetail() {
             <div>
                 {detailInside?.BOARD_CONTENT}
             </div>
-            <Button variant="secondary"><Link to='/update/1'>수정하기</Link></Button>
+            <Button variant="secondary"><Link to={`/update/${id}`}>수정하기</Link></Button>
         </div>
     );
 }

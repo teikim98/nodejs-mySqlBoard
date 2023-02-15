@@ -23,14 +23,15 @@ function Update() {
         try {
             const response = await axios.get("http://localhost:8000/detail");
             setBoard(response.data);
+
         } catch (e) {
-            console.log(e);
         }
     };
 
     useEffect(() => {
         fetchData();
     }, []);
+
 
     console.log(board);
 
@@ -54,16 +55,16 @@ function Update() {
         setContent(e.target.value);
     }
 
-
     const update = () => {
         Axios.post("http://localhost:8000/update", {
             title: title,
             content: content,
+            id: id,
         })
             .then((res) => {
+                console.log("수정 내용 : " + res);
                 alert('글수정 완료!');
                 navigate('/');
-                console.log(res);
             })
             .catch((e) => {
                 console.error(e);
