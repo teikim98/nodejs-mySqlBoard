@@ -30,7 +30,7 @@ function Update() {
     const DetailId = (did: BoardType) => {
         return (did.BOARD_ID === numberId);
     }
-    const detailInside = board.find(DetailId);
+    const detailInside = board.find(result);
 
 
 
@@ -43,17 +43,19 @@ function Update() {
         }
     };
 
+
     const updateSet = () => {
-        if (detailInside?.BOARD_CONTENT !== undefined) {
-            setContent(detailInside.BOARD_CONTENT);
+        if (detailInside !== undefined) {
+            setContent(detailInside?.BOARD_CONTENT);
         }
-        if (detailInside?.BOARD_TITLE !== undefined) {
-            setContent(detailInside.BOARD_TITLE);
+        if (detailInside !== undefined) {
+            setContent(detailInside?.BOARD_TITLE);
         }
     }
 
     useEffect(() => {
         fetchData();
+        updateSet();
     }, []);
 
 
